@@ -45,7 +45,6 @@ public class Student {
     public void setMarks(List<Integer> marks) {
         this.marks = marks;
     }
-
     public int getGroupNumber() {
         return groupNumber;
     }
@@ -54,7 +53,7 @@ public class Student {
         this.groupNumber = groupNumber;
     }
 
-
+	
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
