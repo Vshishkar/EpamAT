@@ -6,6 +6,9 @@ import java.util.List;
 
 public interface StudentDAO {
 
+    /*
+     * returns list of students
+     * */	
     List<Student> getStudents();
 
     List<Integer> getRandomMarks();
