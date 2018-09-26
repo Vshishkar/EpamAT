@@ -6,6 +6,9 @@ import java.util.List;
 
 public interface StudentService {
 
+    /*
+     * test if comments is working :)
+     * */	
     double getAverageMark(Student student);
     
     /*this is my super commit */
