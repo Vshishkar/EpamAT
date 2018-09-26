@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudentServiceImpl implements StudentService {
+
+    /*
+     * @return average mark for student
+     * */		
     public double getAverageMark(Student student) {
 
         double result = 0;
