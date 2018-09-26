@@ -21,6 +21,9 @@ public class StudentServiceImpl implements StudentService {
         return result;
     }
 
+    /*
+     * returns average mark for every syudents at list
+     * */
     public double getAverageMark(List<Student> students) {
 
         double result = 0;
