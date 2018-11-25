@@ -17,8 +17,8 @@
               Please select the number of passengers.
 
 ## Case 3: Booking a plane. Checking if it's possible to book a plane with the same "from" and "to" destinations
-    - 1 Visit https://www.qatarairways.com/en/homepage.html
-    - 2 Type "Minsk" as from
-    - 3 Type "Minsk" as to
-    - 4 Use default values at other fields
-    - 5 Press button "Show flights"
+   - 1 Visit https://www.qatarairways.com/en/homepage.html
+   - 2 Type "Minsk" as from
+   - 3 Type "Minsk" as to
+   - 4 Use default values at other fields
+   - 5 Press button "Show flights"
