@@ -1,44 +1,57 @@
 package by.mmf.vshishkar;
 
+import by.mmf.vshishkar.common.SearchData;
+import by.mmf.vshishkar.steps.MainPageSteps;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 public class MainTest {
 
     private WebDriver driver;
+    private MainPageSteps mainPageSteps;
 
     @Before
-    public void start() {
+    public void openPage() {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
+       /* ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+        options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
+        options.addArguments("--no-sandbox"); // Bypass OS security model
+        driver = new ChromeDriver(options);*/
         driver = new ChromeDriver();
         driver.get("https://www.aviasales.ru");
+        mainPageSteps = new MainPageSteps(driver);
     }
 
     @Test
-    public void findTicketWhenThereAreBlankFields() {
-        WebElement searchButton = driver.findElement(By.xpath("//button[@class='of_main_form__submit']"));
-
-        searchButton.submit();
-        String realError = driver.findElement(By.xpath("//div[@data-testid='autocomplete-destination']"))
-                .getAttribute("data-error-message");
-        System.out.println(realError);
+    public void findTicketWhenThereAreBlankFields(){
         String expectedError = "Укажите город прибытия";
+        String actualValue = mainPageSteps.getErrorWhenNoArrivalAirport();
+        Assert.assertEquals(expectedError,actualValue);
+    }
 
-        Assert.assertEquals(realError, expectedError);
+    @Test
+    public void findTicketWhenArrivalAndDepartureAirportsAreEqual(){
+        SearchData data = new SearchData();
+        data.setArrivalAirport("valuMoscow");
+        data.setDepartureAirport("valuMoscow");
+
+        String expectedError = "Укажите разные города";
+        String actualValue = mainPageSteps.getErrorWhenArrivalAirportEqualsToDepartureOne(data);
+
+        Assert.assertEquals(expectedError,actualValue);
     }
 
 
     @After
     public void close() {
-        driver.close();
+        driver.quit();
+        driver = null;
     }
 
-
 }
-

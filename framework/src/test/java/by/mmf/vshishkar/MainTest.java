@@ -1,5 +1,6 @@
 package by.mmf.vshishkar;
 
+import by.mmf.vshishkar.common.SearchData;
 import by.mmf.vshishkar.steps.MainPageSteps;
 import org.junit.After;
 import org.junit.Assert;
@@ -17,12 +18,11 @@ public class MainTest {
     @Before
     public void openPage() {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-        ChromeOptions options = new ChromeOptions();
-        /*options.addArguments("--headless");
+       /* ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
         options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
         options.addArguments("--no-sandbox"); // Bypass OS security model
-        driver = new ChromeDriver(options);
-        */
+        driver = new ChromeDriver(options);*/
         driver = new ChromeDriver();
         driver.get("https://www.aviasales.ru");
         mainPageSteps = new MainPageSteps(driver);
@@ -32,6 +32,18 @@ public class MainTest {
     public void findTicketWhenThereAreBlankFields(){
         String expectedError = "Укажите город прибытия";
         String actualValue = mainPageSteps.getErrorWhenNoArrivalAirport();
+        Assert.assertEquals(expectedError,actualValue);
+    }
+
+    @Test
+    public void findTicketWhenArrivalAndDepartureAirportsAreEqual(){
+        SearchData data = new SearchData();
+        data.setArrivalAirport("valuMoscow");
+        data.setDepartureAirport("valuMoscow");
+
+        String expectedError = "Укажите разные города";
+        String actualValue = mainPageSteps.getErrorWhenArrivalAirportEqualsToDepartureOne(data);
+
         Assert.assertEquals(expectedError,actualValue);
     }
 
